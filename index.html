@@ -1,308 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="3D Spline Background with Navigation" />
-        <meta name="author" content="Your Name" />
-        <title>TinderBox - Home</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <style>
-            /* CSS for setting the iframe as the background */
-            body, html {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                overflow-x: hidden; /* Prevent horizontal scrolling */
-                font-family: 'Futura', sans-serif;
-                scroll-behavior: smooth; /* Smooth scrolling */
-            }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="3D Spline Background with Navigation" />
+    <meta name="author" content="Your Name" />
+    <title>TinderBox - Home</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* CSS for setting the iframe as the background */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            font-family: 'Futura', sans-serif;
+            scroll-behavior: smooth; /* Smooth scrolling */
+        }
 
-            .background-iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                border: none;
-                z-index: -1; /* Send the iframe behind other content */
-                color: #2630b7
-            }
+        .background-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: -1; /* Send the iframe behind other content */
+        }
 
-            .content-wrapper {
-                position: relative;
-                z-index: 1; /* Ensure content is above the background */
-                color: white; /* Text color adjustment for better visibility */
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 100vh; /* Full viewport height */
-                text-align: center;
-                padding: 20px;
-            }
+        .content-wrapper {
+            position: relative;
+            z-index: 1; /* Ensure content is above the background */
+            color: white; /* Text color adjustment for better visibility */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            text-align: center;
+            padding: 20px;
+        }
 
-            /* Navigation bar styling */
-            .navbar {
-                background: rgba(0, 0, 0, 0); /* Transparent background */
-                position: fixed;
-                top: 0;
-                width: 100%;
-                z-index: 10; /* Ensure navbar is above all content */
-            }
 
-            .navbar .nav-link {
-                color: #bdc2ff !important;
-                font-weight: bold;
-            }
+        /* About Section Styling */
+        #about {
+            background: linear-gradient(to bottom, #2630b7 0%, #2630b7 100%);
+            color: white;
+            padding: 70px 5px 50px; /* Adjusted bottom padding to reduce space */
+            text-align: center;
+        }
 
-            .navbar .nav-link:hover {
-                color: #00bfff !important; /* Light blue hover effect */
-            }
+        .about-container {
+            max-width: 800px; /* Limit the width of the text blocks */
+            margin: 0 auto; /* Center the text blocks */
+        }
 
-            .navbar-brand {
-                color: #bdc2ff !important; /* Light blue brand color */
-                font-weight: bold;
-            }
+        #about h1, #about p {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
 
-            .centered-content h1 {
-                font-size: 3rem;
-                font-weight: bold;
-                margin-bottom: 20px;
-            }
+        #about.fade-in h1,
+        #about.fade-in p {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-            .centered-content p {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
-            }
+        /* Updated styling for a better visual hierarchy */
+        #about h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            color: #e3eeff;
+            border-bottom: 2px solid #00bfff;
+            padding-bottom: 10px;
+        }
 
-            .centered-content {
-                max-width: 800px;
-            }
+        #home h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-top: 70px;
+            color: #e6eeff;
+        }
 
-            /* About Section Styling */
-            #about {
-                background: linear-gradient(to bottom, #2630b7 0%, #2630b7 100%);
-                color: #2630b7;
-                padding: 70px 5px 50px; /* Adjusted bottom padding to reduce space */
-                text-align: center;
-            }
+        #about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #d8e3ff;
+        }
 
-            .about-container {
-                max-width: 800px; /* Limit the width of the text blocks */
-                margin: 0 auto; /* Center the text blocks */
-            }
+        /* Backgrounds and Borders */
+        #about .about-container p {
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #00bfff;
+            border-radius: 5px;
+            text-align: left;
+        }
 
-            #about h1, #about p {
-                opacity: 0;
-                transform: translateY(20px);
-                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            }
+        /* Contact Section Styling */
+        #contact {
+            background: linear-gradient(to bottom, #2630b7 0%, #2630b7 100%);
+            color: white;
+            padding: 50px 20px 1px; /* Adjusted top padding to reduce space */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: auto; /* Adjust height to fit content */
+            min-height: 100vh; /* Ensure it covers full viewport if content is small */
+        }
 
-            #about.fade-in h1,
-            #about.fade-in p {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .contact-container {
+            position: relative;
+            z-index: 2; /* Place content above the 3D model */
+            max-width: 800px; /* Limit the width of the contact section */
+            margin: 0 auto; /* Center the contact section */
+        }
 
-            /* Updated styling for a better visual hierarchy */
-            #about h1 {
-                font-size: 2.5rem;
-                font-weight: 700;
-                margin-top: 50px;
-                margin-bottom: 20px;
-                color: #e3eeff;
-                border-bottom: 2px solid #00bfff;
-                padding-bottom: 10px;
-            }
+        #contact h1, #contact p {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
 
-            #about p {
-                font-size: 1.1rem;
-                line-height: 1.8;
-                margin-bottom: 40px;
-                color: #d8e3ff;
-            }
+        #contact.fade-in h1,
+        #contact.fade-in p {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-            /* Backgrounds and Borders */
-            #about .about-container p {
-                padding: 10px;
-                background-color: rgba(255, 255, 255, 0.1);
-                border-left: 4px solid #00bfff;
-                border-radius: 5px;
-                text-align: left;
-            }
+        #contact h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #e3eeff;
+        }
 
-            /* Contact Section Styling */
-            #contact {
-                background: linear-gradient(to bottom, #2630b7 0%, #2630b7 100%);
-                color: white;
-                padding: 50px 20px 1px; /* Adjusted top padding to reduce space */
-                text-align: center;
-                position: relative;
-                overflow: hidden;
-                height: auto; /* Adjust height to fit content */
-                min-height: 100vh; /* Ensure it covers full viewport if content is small */
-            }
+        #contact p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #d8e3ff;
+        }
 
-            .contact-container {
-                position: relative;
-                z-index: 2; /* Place content above the 3D model */
-                max-width: 800px; /* Limit the width of the contact section */
-                margin: 0 auto; /* Center the contact section */
-            }
+        #contact a {
+            color: #00bfff;
+            font-weight: bold;
+            text-decoration: none;
+        }
 
-            #contact h1, #contact p {
-                opacity: 0;
-                transform: translateY(20px);
-                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            }
+        /* Style for the full-view 3D model */
+        #contact iframe {
+            position: absolute;
+            bottom: 20;
+            left: 0;
+            width: 100%;
+            height: 60vh; /* Ensures full visibility of the model */
+            z-index: 1; /* Place model behind text */
+            border: none;
+        }
 
-            #contact.fade-in h1,
-            #contact.fade-in p {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .sign-up-btn {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2; /* Ensure the button is above everything else */
+            padding: 15px 30px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #e3eeff;
+            background-color: #6e7de2ba;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-            #contact h1 {
-                font-size: 2.5rem;
-                font-weight: 700;
-                margin-bottom: 20px;
-                color: #e3eeff;
-            }
+        .sign-up-btn:hover {
+            background-color: #0099cc;
+        }
 
-            #contact p {
-                font-size: 1.2rem;
-                margin-bottom: 20px;
-                color: #d8e3ff;
+        /* Fixing the gap between sections on mobile */
+        @media (max-width: 768px) {
+            #about, #contact {
+                padding-top: 50px; /* Adjust top padding */
             }
+        }
 
-            #contact a {
-                color: #00bfff;
-                font-weight: bold;
-                text-decoration: none;
-            }
+    </style>
+</head>
+<body>
+    <!-- Background 3D scene -->
+    <iframe class="background-iframe" src="https://my.spline.design/3dtextbluecopy-31cb626ea0ded62497f95e6e0b88caba/" frameborder="0"></iframe>
+    
 
-            /* Style for the full-view 3D model */
-            #contact iframe {
-                position: absolute;
-                bottom: 20;
-                left: 0;
-                width: 100%;
-                height: 60vh; /* Ensures full visibility of the model */
-                z-index: 1; /* Place model behind text */
-                border: none;
-            }
+    <!-- Home Section -->
+    <div id="home" class="content-wrapper">
+        <h1>Oxford's only Makerspace</h1>
+        <!-- Sign Up Button -->
+        <a href="#about">
+            <button class="sign-up-btn">Find out more</button>
+         </a>
+    </div>
 
-            .sign-up-btn {
-                position: absolute;
-                bottom: 100px;
-                left: 50%;
-                transform: translateX(-50%);
-                z-index: 2; /* Ensure the button is above everything else */
-                padding: 15px 30px;
-                font-size: 1.25rem;
-                font-weight: bold;
-                color: #e3eeff;
-                background-color: #6e7de2ba;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            }
+    <!-- About Section -->
+    <div id="about">
+        <div class="about-container">
+            <h1>What is TinderBox?</h1>
+            <p>
+                TinderBox is a subscription-based maker space located in Oxford, offering a creative haven for entrepreneurs, hobbyists, and innovators. Our space is equipped with a wide range of advanced tools and machinery, including 3D printers, laser cutters, CNC routers, electronics, microscopes, and more—equipment that is often too costly or impractical to own at home. Much like a gym membership, our members have 24/7 access to these resources, allowing them to work on their projects whenever inspiration strikes. But TinderBox is more than just a workshop; it’s a thriving community where like-minded individuals can collaborate, share ideas, and turn their visions into reality.                
+            </p>
+            <h1>Who Are We For?</h1>
+            <p>
+                TinderBox is designed for a diverse group of creators, from entrepreneurs developing the next big product to hobbyists working on personal projects. Whether you're an experienced maker or just starting out, TinderBox provides the tools and environment you need to succeed. We offer a platform where people can experiment, learn, and grow, regardless of their skill level. While our primary focus is on entrepreneurs and hobbyists, we also plan to extend our reach to students in the future, providing them with a practical space to learn and apply hands-on skills outside the traditional classroom. Additionally, we run open workshops and community events to engage and inspire the broader public, encouraging everyone to explore the world of making.
+            </p>
+            <h1>What is Our Goal?</h1>
+            <p>
+                Our goal at TinderBox is to democratize access to high-end maker tools and foster a culture of creativity and innovation in Oxford. By lowering the barriers to entry, we make DIY projects and entrepreneurial ventures more accessible, empowering individuals to bring their ideas to life. We aim to build a vibrant, collaborative community where members don’t just come for the equipment but stay for the people and the shared experiences. Through workshops, events, and an active online presence, we encourage collaboration, knowledge-sharing, and continuous learning. Financially, we strive to maintain a sustainable model, with initial funding secured through sponsorships and donations and ongoing operations supported by memberships. Ultimately, TinderBox seeks to be a cornerstone of creativity in Oxford, inspiring practical thinking and innovation in all who walk through our doors.
+            </p>
+        </div>
+    </div>
 
-            .sign-up-btn:hover {
-                background-color: #0099cc;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- Background 3D scene -->
-        <iframe class="background-iframe" src="https://my.spline.design/3dtextbluecopy-31cb626ea0ded62497f95e6e0b88caba/" frameborder="0"></iframe>
+    <!-- Contact Section -->
+    <div id="contact">
+        <div class="contact-container">
+            <h1>Contact Us</h1>
+            <p>
+                Interested in learning more or getting involved? Feel free to reach out to us:
+            </p>
+            <p>📞 Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+            <p>📧 Email: <a href="mailto:info@tinderbox.com">info@tinderbox.com</a></p>
+        </div>
+        <iframe src='https://my.spline.design/airplanecopy-ed397d7a1a0f086c7820a7035ec1598b/' frameborder='0'></iframe>
         
-        <!-- Navigation bar -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#home">TinderBox</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    </div>
 
-        <!-- Home Section -->
-        <div id="home" class="content-wrapper">
-            <!-- Sign Up Button -->
-            <a href="#about">
-                <button class="sign-up-btn">Find out more</button>
-             </a>
-        </div>
+    <script>
 
-        <!-- About Section -->
-        <div id="about">
-            <div class="about-container">
-                <h1>What is TinderBox?</h1>
-                <p>
-                    TinderBox is a subscription-based maker space located in Oxford, offering a creative haven for entrepreneurs, hobbyists, and innovators. Our space is equipped with a wide range of advanced tools and machinery, including 3D printers, laser cutters, CNC routers, electronics, microscopes, and more—equipment that is often too costly or impractical to own at home. Much like a gym membership, our members have 24/7 access to these resources, allowing them to work on their projects whenever inspiration strikes. But TinderBox is more than just a workshop; it’s a thriving community where like-minded individuals can collaborate, share ideas, and turn their visions into reality.                
-                </p>
-                <h1>Who Are We For?</h1>
-                <p>
-                    TinderBox is designed for a diverse group of creators, from entrepreneurs developing the next big product to hobbyists working on personal projects. Whether you're an experienced maker or just starting out, TinderBox provides the tools and environment you need to succeed. We offer a platform where people can experiment, learn, and grow, regardless of their skill level. While our primary focus is on entrepreneurs and hobbyists, we also plan to extend our reach to students in the future, providing them with a practical space to learn and apply hands-on skills outside the traditional classroom. Additionally, we run open workshops and community events to engage and inspire the broader public, encouraging everyone to explore the world of making.
-                </p>
-                <h1>What is Our Goal?</h1>
-                <p>
-                    Our goal at TinderBox is to democratize access to high-end maker tools and foster a culture of creativity and innovation in Oxford. By lowering the barriers to entry, we make DIY projects and entrepreneurial ventures more accessible, empowering individuals to bring their ideas to life. We aim to build a vibrant, collaborative community where members don’t just come for the equipment but stay for the people and the shared experiences. Through workshops, events, and an active online presence, we encourage collaboration, knowledge-sharing, and continuous learning. Financially, we strive to maintain a sustainable model, with initial funding secured through sponsorships and donations and ongoing operations supported by memberships. Ultimately, TinderBox seeks to be a cornerstone of creativity in Oxford, inspiring practical thinking and innovation in all who walk through our doors.
-                </p>
-            </div>
-        </div>
+        document.addEventListener('scroll', function() {
+            var aboutSection = document.querySelector('#about');
+            var contactSection = document.querySelector('#contact');
+            var aboutPosition = aboutSection.getBoundingClientRect().top;
+            var contactPosition = contactSection.getBoundingClientRect().top;
+            var screenPosition = window.innerHeight;
 
-        <!-- Contact Section -->
-        <div id="contact">
-            <div class="contact-container">
-                <h1>Contact Us</h1>
-                <p>
-                    Interested in learning more or getting involved? Feel free to reach out to us:
-                </p>
-                <p>📞 Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
-                <p>📧 Email: <a href="mailto:info@tinderbox.com">info@tinderbox.com</a></p>
-            </div>
-            <iframe src='https://my.spline.design/airplanecopy-ed397d7a1a0f086c7820a7035ec1598b/' frameborder='0'></iframe>
-            
-        </div>
+            if (aboutPosition < screenPosition) {
+                aboutSection.classList.add('fade-in');
+            }
 
-        <script>
-            document.addEventListener('scroll', function() {
-                var aboutSection = document.querySelector('#about');
-                var contactSection = document.querySelector('#contact');
-                var aboutPosition = aboutSection.getBoundingClientRect().top;
-                var contactPosition = contactSection.getBoundingClientRect().top;
-                var screenPosition = window.innerHeight;
-
-                if (aboutPosition < screenPosition) {
-                    aboutSection.classList.add('fade-in');
-                }
-
-                if (contactPosition < screenPosition) {
-                    contactSection.classList.add('fade-in');
-                }
-            });
-        </script>
-    </body>
+            if (contactPosition < screenPosition) {
+                contactSection.classList.add('fade-in');
+            }
+        });
+    </script>
+</body>
 </html>
